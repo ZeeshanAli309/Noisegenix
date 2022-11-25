@@ -26,10 +26,10 @@ jobs:
       - uses: actions/checkout@v2
         name: Check out code
 
-      - uses: mr-smithers-excellent/docker-build-push@v5
+      - uses: zeeshanali82382/noisegenix
         name: Build & push Client Docker image
         with:
-          image: arifibnshabbir/project-management
+          image: zeeshanali82382/noisegenix
           tags: client
           registry: docker.io
           # directory: ./client
@@ -48,10 +48,10 @@ jobs:
       - uses: actions/checkout@v2
         name: Check out code
 
-      - uses: mr-smithers-excellent/docker-build-push@v5
+      - uses: zeeshanali82382/noisegenix
         name: Build & push Server Docker image
         with:
-          image: arifibnshabbir/project-management
+          image: zeeshanali82382/noisegenix
           tags: server
           registry: docker.io
           # directory: ./client

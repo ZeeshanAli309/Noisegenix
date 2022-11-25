@@ -6,9 +6,9 @@ name: Docker CI
 on:
   # Triggers the workflow on push or pull request events but only for the "master" branch
   push:
-    branches: [ "master" ]
+    branches: ['main']
   pull_request:
-    branches: [ "master" ]
+    branches: ['main']
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -25,7 +25,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
         name: Check out code
-      
+
       - uses: mr-smithers-excellent/docker-build-push@v5
         name: Build & push Client Docker image
         with:
@@ -33,10 +33,9 @@ jobs:
           tags: client
           registry: docker.io
           # directory: ./client
-          dockerfile: ./client/Dockerfile
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-
+          dockerfile: ../../frontend/docker-setup/react/development/Dockerfile
+          username: ${{ secrets.DOCKER_PASSWORD }}
+          password: ${{ secrets.DOCKER_USERNAME }}
 
   # This workflow contains a single job called "Server-Deployment"
   Server-Deployment:
@@ -48,7 +47,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
         name: Check out code
-      
+
       - uses: mr-smithers-excellent/docker-build-push@v5
         name: Build & push Server Docker image
         with:
@@ -56,9 +55,9 @@ jobs:
           tags: server
           registry: docker.io
           # directory: ./client
-          dockerfile: ./server/Dockerfile
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}  
+          dockerfile: ../../backend/docker-setup/node/development/Dockerfile
+          username: ${{ secrets.DOCKER_PASSWORD }}
+          password: ${{ secrets.DOCKER_USERNAME }}
 
       # -
       #   name: Set up QEMU
@@ -82,7 +81,6 @@ jobs:
       #     # file: ./client/Dockerfile
       #     push: true
       #     tags: arifibnshabbir/project-management:client
-  
 
       # Runs a single command using the runners shell
       # - name: docker build client
